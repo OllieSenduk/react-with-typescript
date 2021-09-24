@@ -1,31 +1,44 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
+import List from "./components/List";
 import "./App.css";
 
 function App() {
-  const [number, setNumber] = useState<number | null>(null);
+  // const [people, setPeople] = useState([
+  //   {
+  //     name: "jon",
+  //     url: "",
+  //     age: 36,
+  //     note: "Best player ever",
+  //   },
+  //   {
+  //     name: "jon",
+  //     url: "",
+  //     age: 36,
+  //   },
+  // ]);
 
-  const changeNumber = () => {
-    setNumber(10);
-  };
+  interface IState {
+    people: {
+      name: string;
+      age: number;
+      url: string;
+      note?: string;
+    }[];
+  }
+
+  const [people, setPeople] = useState<IState["people"]>([
+    {
+      name: "leBron James",
+      url: "https://www.beestig.be/sites/default/files/styles/article_header/public/artikel/teaser_achtergrond/corgi_3.jpg?itok=uBF2Lm_g",
+      age: 36,
+      note: "Alergic to nuts",
+    },
+  ]);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-          {number}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>People invited to our party</h1>
+      <List people={people} />
     </div>
   );
 }
